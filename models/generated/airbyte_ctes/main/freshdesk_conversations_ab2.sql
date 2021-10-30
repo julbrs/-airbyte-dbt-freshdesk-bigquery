@@ -1,7 +1,7 @@
 {{ config(schema="_airbyte_main", tags=["top-level-intermediate"]) }}
 -- SQL model to cast each column to its adequate SQL type converted from the JSON schema type
 select
-    cast(id as {{ dbt_utils.type_bigint() }}) as id,
+    cast(id as {{ dbt_utils.type_string() }}) as id,
     cast(body as {{ dbt_utils.type_string() }}) as body,
     cast(source as {{ dbt_utils.type_bigint() }}) as source,
     {{ cast_to_boolean('private') }} as private,
@@ -10,7 +10,7 @@ select
     {{ cast_to_boolean('incoming') }} as incoming,
     cast(body_text as {{ dbt_utils.type_string() }}) as body_text,
     cc_emails,
-    cast(ticket_id as {{ dbt_utils.type_bigint() }}) as ticket_id,
+    cast(ticket_id as {{ dbt_utils.type_string() }}) as ticket_id,
     to_emails,
     bcc_emails,
     cast(created_at as {{ dbt_utils.type_string() }}) as created_at,

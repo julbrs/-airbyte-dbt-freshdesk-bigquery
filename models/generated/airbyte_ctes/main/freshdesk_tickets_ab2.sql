@@ -1,7 +1,7 @@
 {{ config(schema="_airbyte_main", tags=["top-level-intermediate"]) }}
 -- SQL model to cast each column to its adequate SQL type converted from the JSON schema type
 select
-    cast(id as {{ dbt_utils.type_bigint() }}) as id,
+    cast(id as {{ dbt_utils.type_string() }}) as id,
     {{ cast_to_boolean('spam') }} as spam,
     tags,
     cast(type as {{ dbt_utils.type_string() }}) as type,

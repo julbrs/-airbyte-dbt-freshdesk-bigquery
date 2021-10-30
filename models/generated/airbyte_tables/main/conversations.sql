@@ -1,14 +1,19 @@
-{{ config(schema="main", tags=["top-level"]) }}
+{{ config(
+    schema="main", 
+    tags=["top-level"], 
+    materialized='incremental', 
+    unique_key='_airbyte_hashid', 
+    on_schema_change='append_new_columns',
+    ) }}
 -- Final base SQL model
 select
     'freshdesk' as source,
     id,
-    (case when category = 3  then 'agent' else 'customer' end) as type,
+    'unknown' as type,
     ticket_id,
-    created_at,
-    updated_at,
+    PARSE_TIMESTAMP("%FT%TZ", created_at) as created_at,
     _airbyte_emitted_at,
-    _airbyte_freshdesk_conversations_hashid
+    _airbyte_freshdesk_conversations_hashid as _airbyte_hashid
 from {{ ref('freshdesk_conversations_ab3') }}
 -- freshdesk_conversations from {{ source('main', '_airbyte_raw_freshdesk_conversations') }}
 
