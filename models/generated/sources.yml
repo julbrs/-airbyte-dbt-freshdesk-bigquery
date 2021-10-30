@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: main
+  quoting:
+    database: true
+    schema: false
+    identifier: false
+  tables:
+  - name: _airbyte_raw_freshdesk_conversations
+  - name: _airbyte_raw_freshdesk_tickets
