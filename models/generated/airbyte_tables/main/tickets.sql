@@ -4,8 +4,8 @@ select
     'freshdesk' as source,
     id,
     status,
-    created_at as createdAt,
-    updated_at as updatedAt,
+    created_at,
+    updated_at,
     _airbyte_emitted_at,
     _airbyte_freshdesk_tickets_hashid
 from {{ ref('freshdesk_tickets_ab3') }}
