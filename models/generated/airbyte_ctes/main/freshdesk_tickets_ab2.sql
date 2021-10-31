@@ -1,12 +1,12 @@
 {{ config(schema="_airbyte_main", tags=["top-level-intermediate"]) }}
 -- SQL model to cast each column to its adequate SQL type converted from the JSON schema type
 select
+    cast(source as {{ dbt_utils.type_string() }}) as source,
     cast(id as {{ dbt_utils.type_string() }}) as id,
     {{ cast_to_boolean('spam') }} as spam,
     tags,
     cast(type as {{ dbt_utils.type_string() }}) as type,
     cast(due_by as {{ dbt_utils.type_string() }}) as due_by,
-    cast(source as {{ dbt_utils.type_bigint() }}) as source,
     cast(status as {{ dbt_utils.type_bigint() }}) as status,
     cast(subject as {{ dbt_utils.type_string() }}) as subject,
     cast(group_id as {{ dbt_utils.type_bigint() }}) as group_id,

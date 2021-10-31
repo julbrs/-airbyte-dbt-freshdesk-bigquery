@@ -1,12 +1,12 @@
 {{ config(schema="_airbyte_main", tags=["top-level-intermediate"]) }}
 -- SQL model to parse JSON blob stored in a single column and extract into separated field columns as described by the JSON Schema
 select
+    'freshdesk' as source,
     {{ json_extract_scalar('_airbyte_data', ['id'], ['id']) }} as id,
     {{ json_extract_scalar('_airbyte_data', ['spam'], ['spam']) }} as spam,
     {{ json_extract_array('_airbyte_data', ['tags'], ['tags']) }} as tags,
     {{ json_extract_scalar('_airbyte_data', ['type'], ['type']) }} as type,
     {{ json_extract_scalar('_airbyte_data', ['due_by'], ['due_by']) }} as due_by,
-    {{ json_extract_scalar('_airbyte_data', ['source'], ['source']) }} as source,
     {{ json_extract_scalar('_airbyte_data', ['status'], ['status']) }} as status,
     {{ json_extract_scalar('_airbyte_data', ['subject'], ['subject']) }} as subject,
     {{ json_extract_scalar('_airbyte_data', ['group_id'], ['group_id']) }} as group_id,
